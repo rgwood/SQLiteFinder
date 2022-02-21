@@ -14,7 +14,7 @@ foreach (var path in GetFiles(startingDir))
 
     if (CheckIfSQLiteDB(path))
     {
-        System.Console.WriteLine(path);
+        WriteLine(path);
         foundCount++;
     }
 }
@@ -46,7 +46,7 @@ bool CheckIfSQLiteDB(string fullPath)
     {
         if (LogExceptions)
         {
-            WriteLine("[red]Exception thrown when checking[/] {fullPath}");
+            MarkupLine($"[red]Exception thrown when checking[/] {fullPath}");
             WriteException(ex);
         }
     }
@@ -57,7 +57,7 @@ bool CheckIfSQLiteDB(string fullPath)
 // Because a recursive Directory.EnumerateFiles throws if any subdirectory cannot be accessed
 static IEnumerable<string> GetFiles(string path)
 {
-    Queue<string> queue = new Queue<string>();
+    Queue<string> queue = new();
     queue.Enqueue(path);
     while (queue.Count > 0)
     {
